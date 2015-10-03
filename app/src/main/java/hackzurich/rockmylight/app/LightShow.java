@@ -1,16 +1,20 @@
 package hackzurich.rockmylight.app;
 
 import android.content.Context;
+import android.content.SharedPreferences;
 import android.content.res.Resources;
 import android.graphics.Color;
 import android.location.LocationListener;
 import android.location.LocationManager;
+import android.net.ConnectivityManager;
+import android.net.NetworkInfo;
 import android.telephony.TelephonyManager;
 import android.util.Log;
 import android.widget.CompoundButton;
 import android.widget.Switch;
 import android.widget.TextView;
 import android.widget.Toast;
+import hackzurich.rockmylight.app.util.SntpClient;
 import hackzurich.rockmylight.app.util.SystemUiHider;
 
 import android.annotation.TargetApi;
@@ -39,9 +43,12 @@ public class LightShow extends Activity {
     protected ColorView contentView;
     protected TextView activeUsers;
     protected TextView nextUpdateIn;
+    protected TextView textTime;
     // color drawing
     private Timer timerColor;
     private boolean runOffline = false;
+    private long nextColorAt;
+    private long dt = 0;
     // GPS
     protected LocationManager locationManager;
     protected LocationListener locationListener;
@@ -99,6 +106,7 @@ public class LightShow extends Activity {
         activeUsers = (TextView) findViewById(R.id.userCount);
         final Switch switchRunOffline = (Switch) findViewById(R.id.switch_run_offline);
         nextUpdateIn = (TextView) findViewById(R.id.text_next_frame);
+        textTime = (TextView) findViewById(R.id.text_time);
 
         // Set up an instance of SystemUiHider to control the system UI for
         // this activity.
@@ -158,6 +166,11 @@ public class LightShow extends Activity {
         // operations to prevent the jarring behavior of controls going away
         // while interacting with the UI.
 
+        //syncTime();
+
+        SharedPreferences settings = getSharedPreferences("rockmylight", 0);
+        dt = settings.getLong("dt_delay", 0);
+
         stepsBuffer = new StepsBuffer();
 
         // GPS
@@ -183,7 +196,10 @@ public class LightShow extends Activity {
 
         // color playback!
         timerColor = new Timer();
-        timerColor.schedule(new ColorTask(), 1000);
+        nextColorAt = getTime();
+        timerColor.scheduleAtFixedRate(new ColorTask(), 1000, 10); //schedule(new ColorTask(), 1000);
+
+        showMsg("dt = "+dt);
     }
 
     @Override
@@ -238,32 +254,59 @@ public class LightShow extends Activity {
         this.longitude = longitude;
     }
 
+    public void setDt(long dt){
+        this.dt = dt;
+        Log.i("time", "time sync with dt="+dt);
+        SharedPreferences settings = getSharedPreferences("rockmylight", 0);
+        SharedPreferences.Editor editor = settings.edit();
+        editor.putLong("dt_delay", dt);
+        editor.commit();
+    }
+
     class ColorTask extends TimerTask {
         public void run() {
             drawHandler.post(colorUpdateRunnable);
         }
     }
 
+    private boolean lockThread = false;
+
     final Runnable colorUpdateRunnable = new Runnable() {
         public void run() {
-            // get color from buffer if there is any
-            LightStep ls = stepsBuffer.getNext();
-            if(ls == null || runOffline){
-                localColors();
-            } else { // there intel from the server
-                scheduleColor( System.currentTimeMillis() ); // massive hack with abs!!!
-                //sendMsg("scheduled in "+(stepsBuffer.getNextTimestamp() - System.currentTimeMillis()));
-                contentView.setColor(Color.parseColor(ls.getColor()));
-            }
-            try{
-                activeUsers.setText("Lights around you: "+ stepsBuffer.getDevicesInNetwork() );
-                contentView.invalidate();
-
-            } catch (Exception e){
-                Log.e("draw","screen update failed!");
+            if(!lockThread) {
+                lockThread = true;
+                showTime();
+                long timeDiff = nextColorAt - getTime();
+                if (timeDiff <= 0) {
+                    replaceColors();
+                } else if (timeDiff <= 15) { // wait // locks things!!!
+                    while (nextColorAt - getTime() > 0) {
+                    }
+                    replaceColors();
+                }
+                lockThread = false;
             }
         }
     };
+
+    public void replaceColors(){
+        // get color from buffer if there is any
+        LightStep ls = stepsBuffer.getNext();
+        if (ls == null || runOffline) {
+            localColors();
+        } else { // there intel from the server
+            scheduleColor(stepsBuffer.getNextTimestamp()); // massive hack with abs!!!
+            //sendMsg("scheduled in "+(stepsBuffer.getNextTimestamp() - System.currentTimeMillis()));
+            contentView.setColor(Color.parseColor(ls.getColor()));
+        }
+        try {
+            activeUsers.setText("Lights around you: " + stepsBuffer.getDevicesInNetwork());
+            contentView.invalidate();
+
+        } catch (Exception e) {
+            Log.e("draw", "screen update failed!");
+        }
+    }
 
     public int randomColor(){
         return Color.rgb(
@@ -286,23 +329,57 @@ public class LightShow extends Activity {
     }
 
     private void localColors(){
-        scheduleColor(System.currentTimeMillis()+1000);
+        scheduleColor( getTime()/1000 *1000 +1000 );
         contentView.setColor(randomColor());
         // todo add execution timer
     }
 
-    public void sendMsg(String st){
+    public void showMsg(String st){
         Toast.makeText(getApplicationContext(), st, Toast.LENGTH_SHORT).show();
     }
 
     public void scheduleColor(long at){
-        long dt = at - System.currentTimeMillis(); // synchronised?
+        long dt = at - getTime(); // synchronised?
         long in = Math.abs(dt) < 10000 ? Math.abs(dt) : 10000;
-        timerColor.schedule( new ColorTask(), in );
+        //timerColor.schedule( new ColorTask(), in );
+        nextColorAt = at;
         nextUpdateIn.setText("Next update in (ms): " + in);
     }
 
     public void offColor(){
 
+    }
+
+    public void showTime(){
+        textTime.setText(""+ (System.currentTimeMillis() / 1000 % 60));
+    }
+
+    public long getTime(){
+        return System.currentTimeMillis() - dt;
+    }
+
+
+
+
+
+
+
+    public void syncTime(){
+        if( isOnline() ) {
+            final Resources res = this.getResources();
+            final int id = Resources.getSystem().getIdentifier(
+                    "config_ntpServer", "string", "android");
+            final String defaultServer = res.getString(id);
+            SntpClient server = new SntpClient();
+            server.requestTime(defaultServer, 0); //hack: must be on the same network!
+            setDt((server.getNtpTime() - System.currentTimeMillis())%1000   );
+        }
+    }
+
+    public boolean isOnline() {
+        ConnectivityManager cm =
+                (ConnectivityManager) getSystemService(Context.CONNECTIVITY_SERVICE);
+        NetworkInfo netInfo = cm.getActiveNetworkInfo();
+        return netInfo != null && netInfo.isConnectedOrConnecting();
     }
 }

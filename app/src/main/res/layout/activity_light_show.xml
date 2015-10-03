@@ -49,6 +49,12 @@
                 android:textAppearance="?android:attr/textAppearanceLarge"
                 android:text="Next frame in..."
                 android:id="@+id/text_next_frame" android:layout_gravity="center_horizontal|top"/>
+        <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textAppearance="?android:attr/textAppearanceLarge"
+                android:text="Large Text"
+                android:id="@+id/text_time" android:layout_gravity="center" android:visibility="visible"/>
     </FrameLayout>
 
 </FrameLayout>

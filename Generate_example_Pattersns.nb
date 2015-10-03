@@ -10,10 +10,10 @@
 NotebookFileLineBreakTest
 NotebookFileLineBreakTest
 NotebookDataPosition[       158,          7]
-NotebookDataLength[     67676,       1507]
-NotebookOptionsPosition[     65978,       1451]
-NotebookOutlinePosition[     66756,       1477]
-CellTagsIndexPosition[     66590,       1471]
+NotebookDataLength[     72472,       1636]
+NotebookOptionsPosition[     70420,       1568]
+NotebookOutlinePosition[     71198,       1594]
+CellTagsIndexPosition[     71032,       1588]
 WindowFrame->Normal*)
 
 (* Beginning of Notebook Content *)
@@ -92,10 +92,12 @@ contains invalid values. \\!\\(\\*ButtonBox[\\\"\[RightSkeleton]\\\", \
 ButtonStyle->\\\"Link\\\", ButtonFrame->None, \
 ButtonData:>\\\"paclet:ref/Export\\\", ButtonNote -> \
 \\\"Export::badval\\\"]\\)\"\>"}]], "Message", "MSG",
- CellChangeTimes->{3.652862255070376*^9}],
+ CellChangeTimes->{3.652862255070376*^9, 3.652877248346651*^9, 
+  3.6528846987593307`*^9}],
 
 Cell[BoxData["$Failed"], "Output",
- CellChangeTimes->{3.652862255077783*^9}]
+ CellChangeTimes->{3.652862255077783*^9, 3.6528772483581123`*^9, 
+  3.6528846987700863`*^9}]
 }, Open  ]],
 
 Cell[CellGroupData[{
@@ -113,7 +115,7 @@ Cell[BoxData[{
  RowBox[{
   RowBox[{"tmp", " ", "=", " ", "0"}], ";"}], "\[IndentingNewLine]", 
  RowBox[{
-  RowBox[{"RandomHexColor", "[", "]"}], ":=", " ", 
+  RowBox[{"SyncHexColor", "[", "]"}], ":=", " ", 
   RowBox[{"(", 
    RowBox[{
     RowBox[{"tmp", "++"}], ";", 
@@ -124,7 +126,9 @@ Cell[BoxData[{
         RowBox[{"tmp", ",", "2"}], "]"}], "\[Equal]", "0"}], ",", " ", 
       "\"\<#FFFFFF\>\"", ",", " ", "\"\<#000000\>\""}], "]"}]}], 
    ")"}]}]}], "Input",
- CellChangeTimes->{{3.6528624349604797`*^9, 3.652862565069125*^9}}],
+ CellChangeTimes->{{3.6528624349604797`*^9, 3.652862565069125*^9}, {
+  3.652884659582868*^9, 3.652884662714114*^9}, {3.652884693795368*^9, 
+  3.652884694561254*^9}, {3.652884764414194*^9, 3.652884768485505*^9}}],
 
 Cell[CellGroupData[{
 
@@ -254,8 +258,8 @@ Cell[BoxData[{
             RowBox[{"\"\<timestamp\>\"", "\[Rule]", 
              RowBox[{"t0", " ", "+", " ", "#"}]}], ",", " ", 
             RowBox[{"\"\<color\>\"", " ", "\[Rule]", "  ", 
-             RowBox[{"RandomHexColor", "[", "]"}]}]}], "}"}], " ", "&"}], "/@",
-          "\[IndentingNewLine]", 
+             RowBox[{"SyncHexColor", "[", "]"}]}]}], "}"}], " ", "&"}], "/@", 
+         "\[IndentingNewLine]", 
          RowBox[{"FoldList", "[", " ", 
           RowBox[{
            RowBox[{
@@ -265,10 +269,10 @@ Cell[BoxData[{
        "]"}]}]}], "\[IndentingNewLine]", "]"}], ",", "\[IndentingNewLine]", 
    "\"\<Text\>\""}], "]"}]}], "Input",
  CellChangeTimes->{{3.6528610510008373`*^9, 3.652861065973164*^9}, {
-  3.652861365014007*^9, 3.652861369387958*^9}, {3.6528614782829437`*^9, 
-  3.652861557230516*^9}, {3.652862340917157*^9, 3.652862353116021*^9}, {
-  3.652871359684819*^9, 3.6528713745876102`*^9}, {3.652871626625279*^9, 
-  3.6528716268401318`*^9}}],
+   3.652861365014007*^9, 3.652861369387958*^9}, {3.6528614782829437`*^9, 
+   3.652861557230516*^9}, {3.652862340917157*^9, 3.652862353116021*^9}, {
+   3.652871359684819*^9, 3.6528713745876102`*^9}, {3.652871626625279*^9, 
+   3.6528716268401318`*^9}, 3.652884712551284*^9}],
 
 Cell[BoxData["\<\"/Users/kmisiunas/Dropbox/Public/example_pattern.json\"\>"], \
 "Output",
@@ -276,7 +280,11 @@ Cell[BoxData["\<\"/Users/kmisiunas/Dropbox/Public/example_pattern.json\"\>"], \
   3.6528615577650013`*^9, 3.652861634885153*^9, 3.652861804915011*^9, 
    3.652862260095806*^9, {3.652862343495431*^9, 3.652862354231276*^9}, 
    3.652862570944047*^9, 3.65286282809746*^9, 3.652870818385893*^9, 
-   3.652871628909526*^9, 3.652871762957301*^9}]
+   3.652871628909526*^9, 3.652871762957301*^9, 3.6528727372823067`*^9, 
+   3.652873333660491*^9, 3.652873685379809*^9, 3.6528745261595097`*^9, 
+   3.6528752609394207`*^9, 3.652877260069825*^9, 3.652878604208357*^9, 
+   3.6528811285250196`*^9, 3.652883600767838*^9, 3.652884618365052*^9, 
+   3.652884666195859*^9, 3.6528847133341293`*^9}]
 }, Open  ]],
 
 Cell[CellGroupData[{
@@ -1447,7 +1455,116 @@ Cell[BoxData[
      "\[LeftDoubleBracket]", 
      RowBox[{"All", ",", "1"}], "\[RightDoubleBracket]"}], "*", "1000"}]}], 
   ";"}]], "Input",
- CellChangeTimes->{{3.65287126712848*^9, 3.65287130105525*^9}}]
+ CellChangeTimes->{{3.65287126712848*^9, 3.65287130105525*^9}}],
+
+Cell[CellGroupData[{
+
+Cell["Attempt 2 ", "Subsubsection",
+ CellChangeTimes->{{3.6528839361733007`*^9, 3.6528839384403763`*^9}}],
+
+Cell[CellGroupData[{
+
+Cell[BoxData[{
+ RowBox[{
+  RowBox[{
+   RowBox[{"songBeats", " ", "=", " ", 
+    RowBox[{
+    "Import", "[", "\"\</Users/kmisiunas/Downloads/song.csv\>\"", "]"}]}], 
+   ";"}], "\[IndentingNewLine]"}], "\[IndentingNewLine]", 
+ RowBox[{
+  RowBox[{"times", " ", "=", " ", 
+   RowBox[{"Round", "/@", 
+    RowBox[{"(", 
+     RowBox[{
+      RowBox[{"songBeats", "\[LeftDoubleBracket]", 
+       RowBox[{"All", ",", "1"}], "\[RightDoubleBracket]"}], "*", "1000"}], 
+     ")"}]}]}], ";"}], "\[IndentingNewLine]", 
+ RowBox[{
+  RowBox[{
+   RowBox[{"colors", " ", "=", " ", 
+    RowBox[{"readHex", "/@", "songBeats"}]}], ";"}], 
+  "\[IndentingNewLine]"}], "\[IndentingNewLine]", 
+ RowBox[{
+  RowBox[{
+   RowBox[{"finalBeats", " ", "=", " ", 
+    RowBox[{"Transpose", "@", 
+     RowBox[{"{", 
+      RowBox[{"times", ",", " ", "colors"}], "}"}]}]}], ";"}], 
+  "\[IndentingNewLine]"}], "\[IndentingNewLine]", 
+ RowBox[{
+  RowBox[{"t0", " ", "=", " ", 
+   RowBox[{
+    RowBox[{"UnixTime", "[", "]"}], "1000"}]}], ";"}], "\[IndentingNewLine]", 
+
+ RowBox[{
+  RowBox[{
+   RowBox[{"Run", "[", 
+    RowBox[{"\"\<open \>\"", "<>", "musicFile"}], "]"}], ";"}], 
+  "\[IndentingNewLine]"}], "\[IndentingNewLine]", 
+ RowBox[{"Export", "[", " ", 
+  RowBox[{"path", ",", "\[IndentingNewLine]", 
+   RowBox[{"StringReplace", "[", 
+    RowBox[{"partOne", ",", " ", "\[IndentingNewLine]", 
+     RowBox[{"\"\<\\\"Replace\\\"\>\"", "->", "\[IndentingNewLine]", 
+      RowBox[{
+      "ExportString", "[", "\[IndentingNewLine]", "\[IndentingNewLine]", 
+       RowBox[{
+        RowBox[{
+         RowBox[{
+          RowBox[{"{", 
+           RowBox[{
+            RowBox[{"\"\<timestamp\>\"", "\[Rule]", 
+             RowBox[{"t0", " ", "+", " ", 
+              RowBox[{
+              "#", "\[LeftDoubleBracket]", "1", "\[RightDoubleBracket]"}]}]}],
+             ",", " ", 
+            RowBox[{"\"\<color\>\"", " ", "\[Rule]", "  ", 
+             RowBox[{
+             "#", "\[LeftDoubleBracket]", "2", "\[RightDoubleBracket]"}]}]}], 
+           "}"}], " ", "&"}], "/@", "\[IndentingNewLine]", "finalBeats"}], 
+        "\[IndentingNewLine]", ",", "\[IndentingNewLine]", "\"\<JSON\>\""}], 
+       "\[IndentingNewLine]", "]"}]}]}], "\[IndentingNewLine]", "]"}], ",", 
+   "\[IndentingNewLine]", "\"\<Text\>\""}], "]"}]}], "Input",
+ CellChangeTimes->{{3.652883944363097*^9, 3.652883982217832*^9}, {
+  3.6528840757494297`*^9, 3.6528840984670277`*^9}, {3.652884139206986*^9, 
+  3.652884198630322*^9}, {3.652884485488928*^9, 3.6528845286284733`*^9}}],
+
+Cell[BoxData["\<\"/Users/kmisiunas/Dropbox/Public/example_pattern.json\"\>"], \
+"Output",
+ CellChangeTimes->{
+  3.652883983956326*^9, 3.652884100502144*^9, 3.6528841404219313`*^9, 
+   3.652884200805595*^9, 3.652884497244657*^9, 3.6528845299640017`*^9, {
+   3.6528845657561693`*^9, 3.652884584686295*^9}}]
+}, Open  ]],
+
+Cell[BoxData[
+ RowBox[{
+  RowBox[{"readHex", "[", "line_", "]"}], ":=", 
+  RowBox[{"StringReverse", "@", 
+   RowBox[{"StringTake", "[", "\[IndentingNewLine]", 
+    RowBox[{
+     RowBox[{"StringReverse", "[", 
+      RowBox[{"(", 
+       RowBox[{"ToString", "@", "line"}], ")"}], "]"}], ",", 
+     "\[IndentingNewLine]", 
+     RowBox[{"{", 
+      RowBox[{"2", ",", "8"}], "}"}]}], "]"}]}]}]], "Input",
+ CellChangeTimes->{{3.6528842168241053`*^9, 3.652884246367896*^9}, {
+  3.652884311925413*^9, 3.6528843616876097`*^9}, {3.652884411397588*^9, 
+  3.652884464462858*^9}}],
+
+Cell[CellGroupData[{
+
+Cell[BoxData[
+ RowBox[{"readHex", "[", 
+  RowBox[{"songBeats", "\[LeftDoubleBracket]", "1", "\[RightDoubleBracket]"}],
+   "]"}]], "Input",
+ CellChangeTimes->{{3.652884468159096*^9, 3.652884476378079*^9}}],
+
+Cell[BoxData["\<\"#804040\"\>"], "Output",
+ CellChangeTimes->{3.652884476651067*^9}]
+}, Open  ]]
+}, Open  ]]
 },
 WindowSize->{808, 655},
 WindowMargins->{{7, Automatic}, {-10, Automatic}},
@@ -1461,54 +1578,66 @@ StyleDefinitions->"Default.nb"
 (*CellTagsOutline
 CellTagsIndex->{
  "Info-64a956e2-d4be-4567-80c0-0bf4c5141d79"->{
-  Cell[5321, 158, 2871, 45, 109, "Print",
+  Cell[5563, 162, 2871, 45, 109, "Print",
    CellTags->"Info-64a956e2-d4be-4567-80c0-0bf4c5141d79"]},
  "Info-9bfaf10a-cbf3-4864-a078-dfe557baf950"->{
-  Cell[11192, 287, 2057, 33, 106, "Print",
+  Cell[11748, 295, 2057, 33, 106, "Print",
    CellTags->"Info-9bfaf10a-cbf3-4864-a078-dfe557baf950"]}
  }
 *)
 (*CellTagsIndex
 CellTagsIndex->{
- {"Info-64a956e2-d4be-4567-80c0-0bf4c5141d79", 66314, 1462},
- {"Info-9bfaf10a-cbf3-4864-a078-dfe557baf950", 66464, 1465}
+ {"Info-64a956e2-d4be-4567-80c0-0bf4c5141d79", 70756, 1579},
+ {"Info-9bfaf10a-cbf3-4864-a078-dfe557baf950", 70906, 1582}
  }
 *)
 (*NotebookFileOutline
 Notebook[{
 Cell[CellGroupData[{
 Cell[580, 22, 2400, 60, 233, "Input"],
-Cell[2983, 84, 448, 10, 24, "Message"],
-Cell[3434, 96, 76, 1, 28, "Output"]
+Cell[2983, 84, 497, 11, 24, "Message"],
+Cell[3483, 97, 127, 2, 28, "Output"]
 }, Open  ]],
 Cell[CellGroupData[{
-Cell[3547, 102, 145, 3, 28, "Input"],
-Cell[3695, 107, 96, 1, 28, "Output"]
+Cell[3647, 104, 145, 3, 28, "Input"],
+Cell[3795, 109, 96, 1, 28, "Output"]
 }, Open  ]],
-Cell[3806, 111, 527, 15, 63, "Input"],
+Cell[3906, 113, 669, 17, 46, "Input"],
 Cell[CellGroupData[{
-Cell[4358, 130, 613, 14, 97, "Input"],
-Cell[4974, 146, 209, 3, 80, "Output"]
+Cell[4600, 134, 613, 14, 97, "Input"],
+Cell[5216, 150, 209, 3, 80, "Output"]
 }, Open  ]],
 Cell[CellGroupData[{
-Cell[5220, 154, 98, 2, 28, "Input"],
-Cell[5321, 158, 2871, 45, 109, "Print",
+Cell[5462, 158, 98, 2, 28, "Input"],
+Cell[5563, 162, 2871, 45, 109, "Print",
  CellTags->"Info-64a956e2-d4be-4567-80c0-0bf4c5141d79"]
 }, Open  ]],
-Cell[8207, 206, 256, 6, 28, "Input"],
-Cell[8466, 214, 238, 5, 28, "Input"],
-Cell[8707, 221, 180, 5, 28, "Input"],
+Cell[8449, 210, 256, 6, 28, "Input"],
+Cell[8708, 218, 238, 5, 28, "Input"],
+Cell[8949, 225, 180, 5, 28, "Input"],
 Cell[CellGroupData[{
-Cell[8912, 230, 1751, 40, 267, "Input"],
-Cell[10666, 272, 369, 6, 28, "Output"]
+Cell[9154, 234, 1775, 40, 267, "Input"],
+Cell[10932, 276, 659, 10, 28, "Output"]
 }, Open  ]],
 Cell[CellGroupData[{
-Cell[11072, 283, 117, 2, 28, "Input"],
-Cell[11192, 287, 2057, 33, 106, "Print",
+Cell[11628, 291, 117, 2, 28, "Input"],
+Cell[11748, 295, 2057, 33, 106, "Print",
  CellTags->"Info-9bfaf10a-cbf3-4864-a078-dfe557baf950"],
-Cell[13252, 322, 2946, 49, 28, "Output"]
+Cell[13808, 330, 2946, 49, 28, "Output"]
 }, Open  ]],
-Cell[16213, 374, 49761, 1075, 3055, "Input"]
+Cell[16769, 382, 49761, 1075, 3055, "Input"],
+Cell[CellGroupData[{
+Cell[66555, 1461, 105, 1, 35, "Subsubsection"],
+Cell[CellGroupData[{
+Cell[66685, 1466, 2502, 63, 386, "Input"],
+Cell[69190, 1531, 304, 5, 28, "Output"]
+}, Open  ]],
+Cell[69509, 1539, 567, 14, 63, "Input"],
+Cell[CellGroupData[{
+Cell[70101, 1557, 204, 4, 28, "Input"],
+Cell[70308, 1563, 84, 1, 28, "Output"]
+}, Open  ]]
+}, Open  ]]
 }
 ]
 *)

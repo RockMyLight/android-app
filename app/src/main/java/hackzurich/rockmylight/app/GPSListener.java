@@ -22,6 +22,8 @@ public class GPSListener implements LocationListener {
 
     @Override
     public void onLocationChanged(Location loc) {
+        long dt = System.currentTimeMillis() - loc.getTime();
+        ls.setDt(dt); //time sync
         ls.setLocation(loc.getLatitude(), loc.getLongitude());
 
         String longitude = "Longitude: " + loc.getLongitude();

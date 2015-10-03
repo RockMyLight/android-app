@@ -24,9 +24,16 @@ import android.os.Bundle;
 import android.os.Handler;
 import android.view.MotionEvent;
 import android.view.View;
+import org.apache.http.HttpResponse;
+import org.apache.http.client.HttpClient;
+import org.apache.http.client.methods.HttpGet;
+import org.apache.http.impl.client.DefaultHttpClient;
 
+import java.io.BufferedReader;
+import java.io.InputStream;
 import java.util.Timer;
 import java.util.TimerTask;
+import 	java.io.InputStreamReader;
 
 
 /**
@@ -60,8 +67,8 @@ public class LightShow extends Activity {
     protected ServerCommunication communication;
     protected int serverCheckInterval = 3000;
     //protected String baseURL = "http://www.rockmylight.com/api/dj/";
-    protected String baseURL = "https://dl.dropboxusercontent.com/u/12073958/example_pattern.json";
-    //protected String baseURL = "http://rockmylight.com/api/dj/1/";
+    //protected String baseURL = "https://dl.dropboxusercontent.com/u/12073958/example_pattern.json";
+    protected String baseURL = "http://rockmylight.com/api/dj/1/";
     protected String deviceID;
 
 
@@ -189,6 +196,8 @@ public class LightShow extends Activity {
                 stepsBuffer.removeStale();
             }
         });
+
+        //updateMusicServer();
 
         // reoccurring requests from the server
         new Timer().scheduleAtFixedRate(askServerForBuffer(), 0, serverCheckInterval);
@@ -381,5 +390,29 @@ public class LightShow extends Activity {
                 (ConnectivityManager) getSystemService(Context.CONNECTIVITY_SERVICE);
         NetworkInfo netInfo = cm.getActiveNetworkInfo();
         return netInfo != null && netInfo.isConnectedOrConnecting();
+    }
+
+    // dropbox file server crashes?
+    public void updateMusicServer() {
+        if(isOnline()) {
+
+            try {
+                HttpClient client = new DefaultHttpClient();
+                HttpGet request = new HttpGet("https://dl.dropboxusercontent.com/u/12073958/music_server.txt");
+                HttpResponse response = client.execute(request);
+
+                String html = "";
+                InputStream in = response.getEntity().getContent();
+                BufferedReader reader = new BufferedReader(new InputStreamReader(in));
+                StringBuilder str = new StringBuilder();
+                String line = null;
+                while((line = reader.readLine()) != null)
+                {
+                    str.append(line);
+                }
+                in.close();
+                baseURL = str.toString().trim();
+            } catch (Exception e){}
+        }
     }
 }

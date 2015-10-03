@@ -1,0 +1,251 @@
+(* Content-type: application/vnd.wolfram.mathematica *)
+
+(*** Wolfram Notebook File ***)
+(* http://www.wolfram.com/nb *)
+
+(* CreatedBy='Mathematica 10.2' *)
+
+(*CacheID: 234*)
+(* Internal cache information:
+NotebookFileLineBreakTest
+NotebookFileLineBreakTest
+NotebookDataPosition[       158,          7]
+NotebookDataLength[     10146,        242]
+NotebookOptionsPosition[      9294,        209]
+NotebookOutlinePosition[      9856,        231]
+CellTagsIndexPosition[      9753,        226]
+WindowFrame->Normal*)
+
+(* Beginning of Notebook Content *)
+Notebook[{
+Cell[BoxData[{
+ RowBox[{
+  RowBox[{
+   RowBox[{
+   "path", " ", "=", " ", 
+    "\"\</Users/kmisiunas/Dropbox/Public/example_pattern.json\>\""}], ";"}], 
+  "\[IndentingNewLine]"}], "\[IndentingNewLine]", 
+ RowBox[{
+  RowBox[{
+   RowBox[{"t0", " ", "=", " ", 
+    RowBox[{"UnixTime", "[", "]"}]}], ";"}], 
+  "\[IndentingNewLine]"}], "\[IndentingNewLine]", 
+ RowBox[{
+  RowBox[{
+   RowBox[{"RandomHexColor", "[", "]"}], ":=", " ", 
+   RowBox[{"\"\<#\>\"", "<>", 
+    RowBox[{"StringJoin", "[", 
+     RowBox[{"ToString", "/@", 
+      RowBox[{"Table", "[", 
+       RowBox[{
+        RowBox[{"RandomInteger", "[", 
+         RowBox[{"{", 
+          RowBox[{"0", ",", "9"}], "}"}], "]"}], ",", "6"}], "]"}]}], 
+     "]"}]}]}], "\[IndentingNewLine]"}], "\[IndentingNewLine]", 
+ RowBox[{"Export", "[", " ", 
+  RowBox[{"path", ",", "\[IndentingNewLine]", 
+   RowBox[{"{", 
+    RowBox[{
+     RowBox[{"\"\<num_of_clients\>\"", " ", "\[Rule]", " ", 
+      RowBox[{"RandomInteger", "[", 
+       RowBox[{"{", 
+        RowBox[{"0", ",", "6"}], "}"}], "]"}]}], ",", "\[IndentingNewLine]", 
+     RowBox[{
+      RowBox[{
+       RowBox[{"\"\<frames\>\"", " ", "\[Rule]", "\[IndentingNewLine]", 
+        RowBox[{"{", 
+         RowBox[{
+          RowBox[{"\"\<timestamp\>\"", "\[Rule]", 
+           RowBox[{"t0", " ", "+", " ", "#"}]}], ",", " ", 
+          RowBox[{"\"\<color\>\"", " ", "\[Rule]", "  ", 
+           RowBox[{"RandomHexColor", "[", "]"}]}]}], "}"}]}], " ", "&"}], "/@",
+       "\[IndentingNewLine]", 
+      RowBox[{"FoldList", "[", " ", 
+       RowBox[{
+        RowBox[{
+         RowBox[{"#1", "+", "#2"}], "&"}], ",", "0", ",", 
+        RowBox[{"Table", "[", 
+         RowBox[{
+          RowBox[{"RandomInteger", "[", 
+           RowBox[{"{", 
+            RowBox[{"200", ",", "1000"}], "}"}], "]"}], ",", "1000"}], 
+         "]"}]}], "]"}]}]}], "\[IndentingNewLine]", "}"}]}], 
+  "\[IndentingNewLine]", "]"}]}], "Input",
+ CellChangeTimes->{{3.652858097703796*^9, 3.6528580990231857`*^9}, 
+   3.652858150534195*^9, {3.652858183760335*^9, 3.65285834556171*^9}, {
+   3.652858421759062*^9, 3.652858474039747*^9}, {3.6528604743097343`*^9, 
+   3.652860517866982*^9}, {3.6528607179146338`*^9, 3.652860720838057*^9}, {
+   3.652860841922906*^9, 3.6528608994457197`*^9}, {3.652861394342869*^9, 
+   3.652861394493617*^9}}],
+
+Cell[CellGroupData[{
+
+Cell[BoxData[
+ RowBox[{"partOne", " ", "=", " ", 
+  RowBox[{"ExportString", "[", " ", "\[IndentingNewLine]", 
+   RowBox[{
+    RowBox[{"{", 
+     RowBox[{
+      RowBox[{"\"\<num_of_clients\>\"", " ", "\[Rule]", " ", 
+       RowBox[{"RandomInteger", "[", 
+        RowBox[{"{", 
+         RowBox[{"0", ",", "6"}], "}"}], "]"}]}], ",", "\[IndentingNewLine]", 
+      
+      RowBox[{"\"\<frames\>\"", " ", "\[Rule]", " ", "\"\<Replace\>\""}]}], 
+     "\[IndentingNewLine]", "}"}], ",", "\[IndentingNewLine]", 
+    "\"\<JSON\>\""}], "]"}]}]], "Input",
+ CellChangeTimes->{{3.6528613982305613`*^9, 3.6528614298485413`*^9}}],
+
+Cell[BoxData["\<\"{\\n    \\\"num_of_clients\\\": 0,\\n    \\\"frames\\\": \\\
+\"Replace\\\"\\n}\"\>"], "Output",
+ CellChangeTimes->{{3.6528614154115553`*^9, 3.652861430393326*^9}}]
+}, Open  ]],
+
+Cell[CellGroupData[{
+
+Cell[BoxData[
+ RowBox[{"?", "StringReplace"}]], "Input",
+ CellChangeTimes->{3.652861488354795*^9}],
+
+Cell[BoxData[
+ RowBox[{
+  StyleBox["\<\"\\!\\(\\*RowBox[{\\\"StringReplace\\\", \\\"[\\\", \
+RowBox[{StyleBox[\\\"\\\\\\\"\\\\!\\\\(\\\\*StyleBox[\\\\\\\"string\\\\\\\",\\\
+\\\\\"TI\\\\\\\"]\\\\)\\\\\\\"\\\", ShowStringCharacters->True], \\\",\\\", \
+RowBox[{StyleBox[\\\"s\\\", \\\"TI\\\"], \\\"\[Rule]\\\", \
+StyleBox[\\\"sp\\\", \\\"TI\\\"]}]}], \\\"]\\\"}]\\) replaces the string \
+expression \\!\\(\\*StyleBox[\\\"s\\\", \\\"TI\\\"]\\) by \
+\\!\\(\\*StyleBox[\\\"sp\\\", \\\"TI\\\"]\\) wherever it appears in \
+\\\"\\!\\(\\*\\nStyleBox[\\\"string\\\", \\\"TI\\\"]\\)\\\". \
+\\n\\!\\(\\*RowBox[{\\\"StringReplace\\\", \\\"[\\\", RowBox[{StyleBox[\\\"\\\
+\\\\\"\\\\!\\\\(\\\\*StyleBox[\\\\\\\"string\\\\\\\",\\\\\\\"TI\\\\\\\"]\\\\)\
+\\\\\\\"\\\", ShowStringCharacters->True], \\\",\\\", RowBox[{\\\"{\\\", \
+RowBox[{RowBox[{SubscriptBox[StyleBox[\\\"s\\\", \\\"TI\\\"], \
+StyleBox[\\\"1\\\", \\\"TR\\\"]], \\\"\[Rule]\\\", \
+SubscriptBox[StyleBox[\\\"sp\\\", \\\"TI\\\"], StyleBox[\\\"1\\\", \
+\\\"TR\\\"]]}], \\\",\\\", RowBox[{SubscriptBox[StyleBox[\\\"s\\\", \
+\\\"TI\\\"], StyleBox[\\\"2\\\", \\\"TR\\\"]], \\\"\[Rule]\\\", \
+SubscriptBox[StyleBox[\\\"sp\\\", \\\"TI\\\"], StyleBox[\\\"2\\\", \
+\\\"TR\\\"]]}], \\\",\\\", StyleBox[\\\"\[Ellipsis]\\\", \\\"TR\\\"]}], \\\"}\
+\\\"}]}], \\\"]\\\"}]\\) replaces the string expressions \
+\\!\\(\\*SubscriptBox[StyleBox[\\\"s\\\", \\\"TI\\\"], StyleBox[\\\"i\\\", \\\
+\"TI\\\"]]\\) by \\!\\(\\*SubscriptBox[StyleBox[\\\"sp\\\", \\\"TI\\\"], \
+StyleBox[\\\"i\\\", \\\"TI\\\"]]\\) whenever they appear as substrings of \
+\\\"\\!\\(\\*\\nStyleBox[\\\"string\\\", \
+\\\"TI\\\"]\\)\\\".\\n\\!\\(\\*RowBox[{\\\"StringReplace\\\", \\\"[\\\", \
+RowBox[{StyleBox[\\\"\\\\\\\"\\\\!\\\\(\\\\*StyleBox[\\\\\\\"string\\\\\\\",\\\
+\\\\\"TI\\\\\\\"]\\\\)\\\\\\\"\\\", ShowStringCharacters->True], \\\",\\\", \
+StyleBox[\\\"srules\\\", \\\"TI\\\"], \\\",\\\", StyleBox[\\\"n\\\", \\\"TI\\\
+\"]}], \\\"]\\\"}]\\) does only the first \\!\\(\\*StyleBox[\\\"n\\\", \\\"TI\
+\\\"]\\) replacements. \\n\\!\\(\\*RowBox[{\\\"StringReplace\\\", \\\"[\\\", \
+RowBox[{RowBox[{\\\"{\\\", RowBox[{SubscriptBox[StyleBox[\\\"s\\\", \
+\\\"TI\\\"], StyleBox[\\\"1\\\", \\\"TR\\\"]], \\\",\\\", \
+SubscriptBox[StyleBox[\\\"s\\\", \\\"TI\\\"], StyleBox[\\\"2\\\", \
+\\\"TR\\\"]], \\\",\\\", StyleBox[\\\"\[Ellipsis]\\\", \\\"TR\\\"]}], \\\"}\\\
+\"}], \\\",\\\", StyleBox[\\\"srules\\\", \\\"TI\\\"]}], \\\"]\\\"}]\\) gives \
+the list of results for each of the \\!\\(\\*SubscriptBox[StyleBox[\\\"s\\\", \
+\\\"TI\\\"], StyleBox[\\\"i\\\", \\\"TI\\\"]]\\). \"\>", "MSG"], 
+  "\[NonBreakingSpace]", 
+  ButtonBox[
+   StyleBox["\[RightSkeleton]", "SR"],
+   Active->True,
+   BaseStyle->"Link",
+   ButtonData->"paclet:ref/StringReplace"]}]], "Print", "PrintUsage",
+ CellChangeTimes->{3.652861489072741*^9},
+ CellTags->"Info-64a956e2-d4be-4567-80c0-0bf4c5141d79"]
+}, Open  ]],
+
+Cell[CellGroupData[{
+
+Cell[BoxData[
+ RowBox[{"StringReplace", "[", 
+  RowBox[{"partOne", ",", " ", "\[IndentingNewLine]", 
+   RowBox[{"\"\<\\\"Replace\\\"\>\"", "->", "\[IndentingNewLine]", 
+    RowBox[{"ExportString", "[", "\[IndentingNewLine]", "\[IndentingNewLine]", 
+     RowBox[{
+      RowBox[{
+       RowBox[{
+        RowBox[{"{", 
+         RowBox[{
+          RowBox[{"\"\<timestamp\>\"", "\[Rule]", 
+           RowBox[{"t0", " ", "+", " ", "#"}]}], ",", " ", 
+          RowBox[{"\"\<color\>\"", " ", "\[Rule]", "  ", 
+           RowBox[{"RandomHexColor", "[", "]"}]}]}], "}"}], " ", "&"}], "/@", 
+       "\[IndentingNewLine]", 
+       RowBox[{"FoldList", "[", " ", 
+        RowBox[{
+         RowBox[{
+          RowBox[{"#1", "+", "#2"}], "&"}], ",", "0", ",", 
+         RowBox[{"Table", "[", 
+          RowBox[{
+           RowBox[{"RandomInteger", "[", 
+            RowBox[{"{", 
+             RowBox[{"200", ",", "1000"}], "}"}], "]"}], ",", "10"}], "]"}]}],
+         "]"}]}], "\[IndentingNewLine]", ",", "\[IndentingNewLine]", 
+      "\"\<JSON\>\""}], "\[IndentingNewLine]", "]"}]}]}], 
+  "\[IndentingNewLine]", "]"}]], "Input",
+ CellChangeTimes->{{3.6528610510008373`*^9, 3.652861065973164*^9}, {
+  3.652861365014007*^9, 3.652861369387958*^9}, {3.6528614782829437`*^9, 
+  3.6528615179709377`*^9}}],
+
+Cell[BoxData["\<\"{\\n    \\\"num_of_clients\\\": 0,\\n    \\\"frames\\\": \
+[\\n    {\\n        \\\"timestamp\\\": 1443872128,\\n        \\\"color\\\": \
+\\\"#014884\\\"\\n    },\\n    {\\n        \\\"timestamp\\\": 1443872415,\\n  \
+      \\\"color\\\": \\\"#213665\\\"\\n    },\\n    {\\n        \\\"timestamp\
+\\\": 1443873168,\\n        \\\"color\\\": \\\"#483308\\\"\\n    },\\n    \
+{\\n        \\\"timestamp\\\": 1443873967,\\n        \\\"color\\\": \
+\\\"#616590\\\"\\n    },\\n    {\\n        \\\"timestamp\\\": 1443874233,\\n  \
+      \\\"color\\\": \\\"#982362\\\"\\n    },\\n    {\\n        \\\"timestamp\
+\\\": 1443875210,\\n        \\\"color\\\": \\\"#944498\\\"\\n    },\\n    \
+{\\n        \\\"timestamp\\\": 1443875734,\\n        \\\"color\\\": \
+\\\"#954511\\\"\\n    },\\n    {\\n        \\\"timestamp\\\": 1443876341,\\n  \
+      \\\"color\\\": \\\"#625690\\\"\\n    },\\n    {\\n        \\\"timestamp\
+\\\": 1443876843,\\n        \\\"color\\\": \\\"#579294\\\"\\n    },\\n    \
+{\\n        \\\"timestamp\\\": 1443877279,\\n        \\\"color\\\": \
+\\\"#777500\\\"\\n    },\\n    {\\n        \\\"timestamp\\\": 1443878009,\\n  \
+      \\\"color\\\": \\\"#399998\\\"\\n    }\\n]\\n}\"\>"], "Output",
+ CellChangeTimes->{3.652861518369632*^9}]
+}, Open  ]]
+},
+WindowSize->{808, 655},
+WindowMargins->{{4, Automatic}, {Automatic, 4}},
+FrontEndVersion->"10.2 for Mac OS X x86 (32-bit, 64-bit Kernel) (July 6, \
+2015)",
+StyleDefinitions->"Default.nb"
+]
+(* End of Notebook Content *)
+
+(* Internal cache information *)
+(*CellTagsOutline
+CellTagsIndex->{
+ "Info-64a956e2-d4be-4567-80c0-0bf4c5141d79"->{
+  Cell[3822, 109, 2871, 45, 109, "Print",
+   CellTags->"Info-64a956e2-d4be-4567-80c0-0bf4c5141d79"]}
+ }
+*)
+(*CellTagsIndex
+CellTagsIndex->{
+ {"Info-64a956e2-d4be-4567-80c0-0bf4c5141d79", 9628, 220}
+ }
+*)
+(*NotebookFileOutline
+Notebook[{
+Cell[558, 20, 2304, 58, 233, "Input"],
+Cell[CellGroupData[{
+Cell[2887, 82, 613, 14, 97, "Input"],
+Cell[3503, 98, 181, 2, 80, "Output"]
+}, Open  ]],
+Cell[CellGroupData[{
+Cell[3721, 105, 98, 2, 28, "Input"],
+Cell[3822, 109, 2871, 45, 109, "Print",
+ CellTags->"Info-64a956e2-d4be-4567-80c0-0bf4c5141d79"]
+}, Open  ]],
+Cell[CellGroupData[{
+Cell[6730, 159, 1284, 29, 182, "Input"],
+Cell[8017, 190, 1261, 16, 845, "Output"]
+}, Open  ]]
+}
+]
+*)
+
+(* End of internal cache information *)

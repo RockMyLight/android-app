@@ -26,7 +26,7 @@
                       android:layout_height="wrap_content"
                       android:layout_gravity="center_horizontal|bottom"
                       android:background="@color/black_overlay"
-                      android:orientation="horizontal"
+                      android:orientation="vertical"
                       tools:ignore="UselessParent" android:gravity="center_horizontal">
 
             <TextView
@@ -36,8 +36,19 @@
                     android:text="Lights around you: 1"
                     android:id="@+id/userCount" android:layout_alignParentBottom="true"
                     android:layout_centerHorizontal="true" android:layout_marginBottom="39dp" android:textSize="25dp"/>
+            <Switch
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="Run Offline"
+                    android:id="@+id/switch_run_offline" android:layout_gravity="center_horizontal" android:checked="false"/>
 
         </LinearLayout>
+        <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textAppearance="?android:attr/textAppearanceLarge"
+                android:text="Next frame in..."
+                android:id="@+id/text_next_frame" android:layout_gravity="center_horizontal|top"/>
     </FrameLayout>
 
 </FrameLayout>

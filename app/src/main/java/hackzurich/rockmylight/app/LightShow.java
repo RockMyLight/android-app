@@ -1,11 +1,14 @@
 package hackzurich.rockmylight.app;
 
 import android.content.Context;
+import android.content.res.Resources;
 import android.graphics.Color;
 import android.location.LocationListener;
 import android.location.LocationManager;
 import android.telephony.TelephonyManager;
 import android.util.Log;
+import android.widget.CompoundButton;
+import android.widget.Switch;
 import android.widget.TextView;
 import android.widget.Toast;
 import hackzurich.rockmylight.app.util.SystemUiHider;
@@ -35,8 +38,10 @@ public class LightShow extends Activity {
     final Handler drawHandler = new Handler();
     protected ColorView contentView;
     protected TextView activeUsers;
+    protected TextView nextUpdateIn;
     // color drawing
     private Timer timerColor;
+    private boolean runOffline = false;
     // GPS
     protected LocationManager locationManager;
     protected LocationListener locationListener;
@@ -48,8 +53,8 @@ public class LightShow extends Activity {
     protected ServerCommunication communication;
     protected int serverCheckInterval = 3000;
     //protected String baseURL = "http://www.rockmylight.com/api/dj/";
-    //protected String baseURL = "https://dl.dropboxusercontent.com/u/12073958/example_pattern.json";
-    protected String baseURL = "http://rockmylight.com/api/dj/1/";
+    protected String baseURL = "https://dl.dropboxusercontent.com/u/12073958/example_pattern.json";
+    //protected String baseURL = "http://rockmylight.com/api/dj/1/";
     protected String deviceID;
 
 
@@ -92,6 +97,8 @@ public class LightShow extends Activity {
         final View controlsView = findViewById(R.id.fullscreen_content_controls);
         contentView = (ColorView) findViewById(R.id.fullscreen_content);
         activeUsers = (TextView) findViewById(R.id.userCount);
+        final Switch switchRunOffline = (Switch) findViewById(R.id.switch_run_offline);
+        nextUpdateIn = (TextView) findViewById(R.id.text_next_frame);
 
         // Set up an instance of SystemUiHider to control the system UI for
         // this activity.
@@ -162,10 +169,17 @@ public class LightShow extends Activity {
         final TelephonyManager tm = (TelephonyManager) getBaseContext().getSystemService(Context.TELEPHONY_SERVICE);
         deviceID = tm.getDeviceId();
 
+        // button listeners
+        switchRunOffline.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
+            public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
+                runOffline = isChecked;
+                stepsBuffer.removeStale();
+            }
+        });
+
         // reoccurring requests from the server
         new Timer().scheduleAtFixedRate(askServerForBuffer(), 0, serverCheckInterval);
-
-        Toast.makeText(getApplicationContext(), "You are ready to rock!", Toast.LENGTH_SHORT).show();
+        
 
         // color playback!
         timerColor = new Timer();
@@ -227,7 +241,6 @@ public class LightShow extends Activity {
     class ColorTask extends TimerTask {
         public void run() {
             drawHandler.post(colorUpdateRunnable);
-            //timer.cancel(); //Terminate the timer thread
         }
     }
 
@@ -235,12 +248,10 @@ public class LightShow extends Activity {
         public void run() {
             // get color from buffer if there is any
             LightStep ls = stepsBuffer.getNext();
-            if(ls == null){
+            if(ls == null || runOffline){
                 localColors();
             } else { // there intel from the server
-                timerColor.schedule(
-                        new ColorTask(),
-                        Math.abs(stepsBuffer.getNextTimestamp() - System.currentTimeMillis()) ); // massive hack with abs!!!
+                scheduleColor( System.currentTimeMillis() ); // massive hack with abs!!!
                 //sendMsg("scheduled in "+(stepsBuffer.getNextTimestamp() - System.currentTimeMillis()));
                 contentView.setColor(Color.parseColor(ls.getColor()));
             }
@@ -275,7 +286,7 @@ public class LightShow extends Activity {
     }
 
     private void localColors(){
-        timerColor.schedule(new ColorTask(), 1000);
+        scheduleColor(System.currentTimeMillis()+1000);
         contentView.setColor(randomColor());
         // todo add execution timer
     }
@@ -284,4 +295,14 @@ public class LightShow extends Activity {
         Toast.makeText(getApplicationContext(), st, Toast.LENGTH_SHORT).show();
     }
 
+    public void scheduleColor(long at){
+        long dt = at - System.currentTimeMillis(); // synchronised?
+        long in = Math.abs(dt) < 10000 ? Math.abs(dt) : 10000;
+        timerColor.schedule( new ColorTask(), in );
+        nextUpdateIn.setText("Next update in (ms): " + in);
+    }
+
+    public void offColor(){
+
+    }
 }

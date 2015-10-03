@@ -29,17 +29,19 @@ public class StepsBuffer {
     }
 
     public void add(LightStep [] addArr){
-        long tDrop = addArr[0].getTimestamp();
-        // drop olf elements form the buffer that have overlapping elements
-        for( int i=0; i<array.size(); i++){
-            if(array.get(i).getTimestamp() >= tDrop ){
-                array.remove(i);
-                i--;
+        if(addArr.length > 0) {
+            long tDrop = addArr[0].getTimestamp();
+            // drop olf elements form the buffer that have overlapping elements
+            for (int i = 0; i < array.size(); i++) {
+                if (array.get(i).getTimestamp() >= tDrop) {
+                    array.remove(i);
+                    i--;
+                }
             }
-        }
-        // add new elements
-        for(int i=0; i<addArr.length; i++){
-            array.add(addArr[i]);
+            // add new elements
+            for (int i = 0; i < addArr.length; i++) {
+                array.add(addArr[i]);
+            }
         }
         removeStale();
         //debug
@@ -58,7 +60,7 @@ public class StepsBuffer {
         }
     }
 
-    private void removeStale(){
+    public void removeStale(){
         for( int i=0; i<array.size(); i++){
             if(array.get(i).getTimestamp() <= System.currentTimeMillis()){
                 array.remove(i);

@@ -55,7 +55,7 @@
                 android:layout_height="wrap_content"
                 android:textAppearance="?android:attr/textAppearanceLarge"
                 android:text="Large Text"
-                android:id="@+id/text_time" android:layout_gravity="center" android:visibility="visible"/>
+                android:id="@+id/text_time" android:layout_gravity="center" android:visibility="invisible"/>
     </FrameLayout>
 
 </FrameLayout>

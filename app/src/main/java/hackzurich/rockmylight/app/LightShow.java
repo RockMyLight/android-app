@@ -4,6 +4,7 @@ import android.content.Context;
 import android.content.SharedPreferences;
 import android.content.res.Resources;
 import android.graphics.Color;
+import android.location.Location;
 import android.location.LocationListener;
 import android.location.LocationManager;
 import android.net.ConnectivityManager;
@@ -68,7 +69,8 @@ public class LightShow extends Activity {
     protected int serverCheckInterval = 3000;
     //protected String baseURL = "http://www.rockmylight.com/api/dj/";
     //protected String baseURL = "https://dl.dropboxusercontent.com/u/12073958/example_pattern.json";
-    protected String baseURL = "http://rockmylight.com/api/dj/1/";
+    //protected String baseURL = "http://rockmylight.com/api/dj/1/";
+    protected String baseURL = "http://rockmylight.com/api/dj/auto/";
     protected String deviceID;
 
 
@@ -184,6 +186,8 @@ public class LightShow extends Activity {
         locationManager = (LocationManager) getSystemService(getApplicationContext().LOCATION_SERVICE);
         locationListener = new GPSListener(this);
         locationManager.requestLocationUpdates(LocationManager.GPS_PROVIDER, 5000, 10, locationListener);
+        //Location gps = locationManager.getLastKnownLocation(LocationManager.GPS_PROVIDER);
+
 
         // get device id
         final TelephonyManager tm = (TelephonyManager) getBaseContext().getSystemService(Context.TELEPHONY_SERVICE);
@@ -208,7 +212,9 @@ public class LightShow extends Activity {
         nextColorAt = getTime();
         timerColor.scheduleAtFixedRate(new ColorTask(), 1000, 10); //schedule(new ColorTask(), 1000);
 
-        showMsg("dt = "+dt);
+        showMsg("dt = " + dt);
+        //showMsg("deviceID = "+Double.valueOf(deviceID));
+        setLocation(Double.valueOf(deviceID), 0.0);
     }
 
     @Override
@@ -258,9 +264,10 @@ public class LightShow extends Activity {
     // ######### CUSTOM METHODS #########
 
 
-    public void setLocation(double latitude, double longitude) {
-        this.latitude = latitude;
-        this.longitude = longitude;
+    public void setLocation(double latitudeNew, double longitudeNew) {
+        showMsg("lat: "+latitudeNew+"\nlon: "+longitudeNew);
+        this.latitude = latitudeNew;
+        this.longitude = longitudeNew;
     }
 
     public void setDt(long dt){

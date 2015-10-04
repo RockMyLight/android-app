@@ -10,77 +10,78 @@
 NotebookFileLineBreakTest
 NotebookFileLineBreakTest
 NotebookDataPosition[       158,          7]
-NotebookDataLength[    952930,      24279]
-NotebookOptionsPosition[    951068,      24213]
-NotebookOutlinePosition[    951636,      24235]
-CellTagsIndexPosition[    951529,      24230]
+NotebookDataLength[    953192,      24282]
+NotebookOptionsPosition[    951294,      24215]
+NotebookOutlinePosition[    951862,      24237]
+CellTagsIndexPosition[    951755,      24232]
 WindowFrame->Normal*)
 
 (* Beginning of Notebook Content *)
 Notebook[{
+Cell[BoxData[
+ RowBox[{
+  RowBox[{
+  "path", " ", "=", " ", 
+   "\"\</Users/kmisiunas/Dropbox/Public/example_pattern2.json\>\""}], 
+  ";"}]], "Input"],
 
 Cell[CellGroupData[{
-Cell[BoxData[{
- RowBox[{
+
+Cell[BoxData[
+ RowBox[{"\[IndentingNewLine]", 
   RowBox[{
    RowBox[{
-   "path", " ", "=", " ", 
-    "\"\</Users/kmisiunas/Dropbox/Public/example_pattern.json\>\""}], ";"}], 
-  "\[IndentingNewLine]"}], "\[IndentingNewLine]", 
- RowBox[{
-  RowBox[{
-   RowBox[{"t0", " ", "=", " ", 
-    RowBox[{
-     RowBox[{"UnixTime", "[", "]"}], "1000"}]}], ";"}], 
-  "\[IndentingNewLine]"}], "\[IndentingNewLine]", 
- RowBox[{
-  RowBox[{
-   RowBox[{"RandomHexColor", "[", "]"}], ":=", " ", 
-   RowBox[{"\"\<#\>\"", "<>", 
-    RowBox[{"StringJoin", "[", 
-     RowBox[{"ToString", "/@", 
-      RowBox[{"Table", "[", 
-       RowBox[{
+    RowBox[{"t0", " ", "=", " ", 
+     RowBox[{
+      RowBox[{"UnixTime", "[", "]"}], "1000"}]}], ";"}], 
+   "\[IndentingNewLine]", "\[IndentingNewLine]", 
+   RowBox[{
+    RowBox[{"RandomHexColor", "[", "]"}], ":=", " ", 
+    RowBox[{"\"\<#\>\"", "<>", 
+     RowBox[{"StringJoin", "[", 
+      RowBox[{"ToString", "/@", 
+       RowBox[{"Table", "[", 
+        RowBox[{
+         RowBox[{"RandomInteger", "[", 
+          RowBox[{"{", 
+           RowBox[{"0", ",", "9"}], "}"}], "]"}], ",", "6"}], "]"}]}], 
+      "]"}]}]}], "\[IndentingNewLine]", "\[IndentingNewLine]", 
+   RowBox[{"Export", "[", " ", 
+    RowBox[{"path", ",", "\[IndentingNewLine]", 
+     RowBox[{"{", 
+      RowBox[{
+       RowBox[{"\"\<num_of_clients\>\"", " ", "\[Rule]", " ", 
         RowBox[{"RandomInteger", "[", 
          RowBox[{"{", 
-          RowBox[{"0", ",", "9"}], "}"}], "]"}], ",", "6"}], "]"}]}], 
-     "]"}]}]}], "\[IndentingNewLine]"}], "\[IndentingNewLine]", 
- RowBox[{"Export", "[", " ", 
-  RowBox[{"path", ",", "\[IndentingNewLine]", 
-   RowBox[{"{", 
-    RowBox[{
-     RowBox[{"\"\<num_of_clients\>\"", " ", "\[Rule]", " ", 
-      RowBox[{"RandomInteger", "[", 
-       RowBox[{"{", 
-        RowBox[{"0", ",", "6"}], "}"}], "]"}]}], ",", "\[IndentingNewLine]", 
-     RowBox[{
-      RowBox[{
-       RowBox[{"\"\<frames\>\"", " ", "\[Rule]", "\[IndentingNewLine]", 
-        RowBox[{"{", 
-         RowBox[{
-          RowBox[{"\"\<timestamp\>\"", "\[Rule]", 
-           RowBox[{"t0", " ", "+", " ", "#"}]}], ",", " ", 
-          RowBox[{"\"\<color\>\"", " ", "\[Rule]", "  ", 
-           RowBox[{"RandomHexColor", "[", "]"}]}]}], "}"}]}], " ", "&"}], "/@",
-       "\[IndentingNewLine]", 
-      RowBox[{"FoldList", "[", " ", 
+          RowBox[{"0", ",", "6"}], "}"}], "]"}]}], ",", "\[IndentingNewLine]", 
        RowBox[{
         RowBox[{
-         RowBox[{"#1", "+", "#2"}], "&"}], ",", "0", ",", 
-        RowBox[{"Table", "[", 
+         RowBox[{"\"\<frames\>\"", " ", "\[Rule]", "\[IndentingNewLine]", 
+          RowBox[{"{", 
+           RowBox[{
+            RowBox[{"\"\<timestamp\>\"", "\[Rule]", 
+             RowBox[{"t0", " ", "+", " ", "#"}]}], ",", " ", 
+            RowBox[{"\"\<color\>\"", " ", "\[Rule]", "  ", 
+             RowBox[{"RandomHexColor", "[", "]"}]}]}], "}"}]}], " ", "&"}], "/@",
+         "\[IndentingNewLine]", 
+        RowBox[{"FoldList", "[", " ", 
          RowBox[{
-          RowBox[{"RandomInteger", "[", 
-           RowBox[{"{", 
-            RowBox[{"200", ",", "1000"}], "}"}], "]"}], ",", "1000"}], 
-         "]"}]}], "]"}]}]}], "\[IndentingNewLine]", "}"}]}], 
-  "\[IndentingNewLine]", "]"}]}], "Input",
+          RowBox[{
+           RowBox[{"#1", "+", "#2"}], "&"}], ",", "0", ",", 
+          RowBox[{"Table", "[", 
+           RowBox[{
+            RowBox[{"RandomInteger", "[", 
+             RowBox[{"{", 
+              RowBox[{"200", ",", "1000"}], "}"}], "]"}], ",", "1000"}], 
+           "]"}]}], "]"}]}]}], "\[IndentingNewLine]", "}"}]}], 
+    "\[IndentingNewLine]", "]"}]}]}]], "Input",
  CellChangeTimes->{{3.652858097703796*^9, 3.6528580990231857`*^9}, 
    3.652858150534195*^9, {3.652858183760335*^9, 3.65285834556171*^9}, {
    3.652858421759062*^9, 3.652858474039747*^9}, {3.6528604743097343`*^9, 
    3.652860517866982*^9}, {3.6528607179146338`*^9, 3.652860720838057*^9}, {
    3.652860841922906*^9, 3.6528608994457197`*^9}, {3.652861394342869*^9, 
    3.652861394493617*^9}, 3.652861544722217*^9, {3.652862253889081*^9, 
-   3.652862254334959*^9}}],
+   3.652862254334959*^9}, {3.65289054327875*^9, 3.6528905520616093`*^9}}],
 
 Cell[BoxData[
  RowBox[{
@@ -93,11 +94,11 @@ ButtonStyle->\\\"Link\\\", ButtonFrame->None, \
 ButtonData:>\\\"paclet:ref/Export\\\", ButtonNote -> \
 \\\"Export::badval\\\"]\\)\"\>"}]], "Message", "MSG",
  CellChangeTimes->{3.652862255070376*^9, 3.652877248346651*^9, 
-  3.6528846987593307`*^9, 3.652886803712646*^9}],
+  3.6528846987593307`*^9, 3.652886803712646*^9, 3.6528905437221727`*^9}],
 
 Cell[BoxData["$Failed"], "Output",
  CellChangeTimes->{3.652862255077783*^9, 3.6528772483581123`*^9, 
-  3.6528846987700863`*^9, 3.652886803724471*^9}]
+  3.6528846987700863`*^9, 3.652886803724471*^9, 3.6528905437374773`*^9}]
 }, Open  ]],
 
 Cell[CellGroupData[{
@@ -284,8 +285,8 @@ Cell[BoxData[{
    3.6528887191986103`*^9, 3.65288873522016*^9}, {3.6528898889923363`*^9, 
    3.6528899161873217`*^9}}],
 
-Cell[BoxData["\<\"/Users/kmisiunas/Dropbox/Public/example_pattern.json\"\>"], \
-"Output",
+Cell[BoxData["\<\"/Users/kmisiunas/Dropbox/Public/example_pattern2.json\"\>"],\
+ "Output",
  CellChangeTimes->{
   3.6528615577650013`*^9, 3.652861634885153*^9, 3.652861804915011*^9, 
    3.652862260095806*^9, {3.652862343495431*^9, 3.652862354231276*^9}, 
@@ -298,7 +299,8 @@ Cell[BoxData["\<\"/Users/kmisiunas/Dropbox/Public/example_pattern.json\"\>"], \
    3.6528855056951237`*^9, 3.65288592235471*^9, 3.652886868118085*^9, 
    3.652887327636654*^9, 3.652887550017253*^9, 3.652888737735476*^9, 
    3.652888943636332*^9, 3.652889919399932*^9, 3.6528900297488813`*^9, 
-   3.652890241569579*^9}]
+   3.652890241569579*^9, 3.652890372186414*^9, 3.652890431476903*^9, 
+   3.652890564223042*^9}]
 }, Open  ]],
 
 Cell[CellGroupData[{
@@ -24223,62 +24225,63 @@ StyleDefinitions->"Default.nb"
 (*CellTagsOutline
 CellTagsIndex->{
  "Info-64a956e2-d4be-4567-80c0-0bf4c5141d79"->{
-  Cell[5607, 162, 2871, 45, 109, "Print",
+  Cell[5762, 163, 2871, 45, 109, "Print",
    CellTags->"Info-64a956e2-d4be-4567-80c0-0bf4c5141d79"]}
  }
 *)
 (*CellTagsIndex
 CellTagsIndex->{
- {"Info-64a956e2-d4be-4567-80c0-0bf4c5141d79", 951404, 24224}
+ {"Info-64a956e2-d4be-4567-80c0-0bf4c5141d79", 951630, 24226}
  }
 *)
 (*NotebookFileOutline
 Notebook[{
+Cell[558, 20, 150, 5, 28, "Input"],
 Cell[CellGroupData[{
-Cell[580, 22, 2400, 60, 233, "Input"],
-Cell[2983, 84, 519, 11, 24, "Message"],
-Cell[3505, 97, 149, 2, 28, "Output"]
+Cell[733, 29, 2354, 54, 216, "Input"],
+Cell[3090, 85, 543, 11, 24, "Message"],
+Cell[3636, 98, 173, 2, 28, "Output"]
 }, Open  ]],
 Cell[CellGroupData[{
-Cell[3691, 104, 145, 3, 28, "Input"],
-Cell[3839, 109, 96, 1, 28, "Output"]
+Cell[3846, 105, 145, 3, 28, "Input"],
+Cell[3994, 110, 96, 1, 28, "Output"]
 }, Open  ]],
-Cell[3950, 113, 669, 17, 46, "Input"],
+Cell[4105, 114, 669, 17, 46, "Input"],
 Cell[CellGroupData[{
-Cell[4644, 134, 613, 14, 97, "Input"],
-Cell[5260, 150, 209, 3, 80, "Output"]
+Cell[4799, 135, 613, 14, 97, "Input"],
+Cell[5415, 151, 209, 3, 80, "Output"]
 }, Open  ]],
 Cell[CellGroupData[{
-Cell[5506, 158, 98, 2, 28, "Input"],
-Cell[5607, 162, 2871, 45, 109, "Print",
+Cell[5661, 159, 98, 2, 28, "Input"],
+Cell[5762, 163, 2871, 45, 109, "Print",
  CellTags->"Info-64a956e2-d4be-4567-80c0-0bf4c5141d79"]
 }, Open  ]],
-Cell[8493, 210, 293, 7, 28, "Input"],
-Cell[8789, 219, 238, 5, 28, "Input"],
-Cell[9030, 226, 180, 5, 28, "Input"],
+Cell[8648, 211, 293, 7, 28, "Input"],
+Cell[8944, 220, 238, 5, 28, "Input"],
+Cell[9185, 227, 180, 5, 28, "Input"],
 Cell[CellGroupData[{
-Cell[9235, 235, 2134, 49, 318, "Input"],
-Cell[11372, 286, 920, 14, 28, "Output"]
+Cell[9390, 236, 2134, 49, 318, "Input"],
+Cell[11527, 287, 991, 15, 28, "Output"]
 }, Open  ]],
 Cell[CellGroupData[{
-Cell[12329, 305, 105, 1, 35, "Subsubsection"],
+Cell[12555, 307, 105, 1, 35, "Subsubsection"],
 Cell[CellGroupData[{
-Cell[12459, 310, 2582, 65, 386, "Input"],
-Cell[15044, 377, 490, 8, 28, "Output"]
+Cell[12685, 312, 2582, 65, 386, "Input"],
+Cell[15270, 379, 490, 8, 28, "Output"]
 }, Open  ]],
-Cell[15549, 388, 761, 18, 63, "Input"],
+Cell[15775, 390, 761, 18, 63, "Input"],
 Cell[CellGroupData[{
-Cell[16335, 410, 204, 4, 28, "Input"],
-Cell[16542, 416, 84, 1, 28, "Output"]
+Cell[16561, 412, 204, 4, 28, "Input"],
+Cell[16768, 418, 84, 1, 28, "Output"]
 }, Open  ]],
-Cell[16641, 420, 552, 16, 46, "Input"],
+Cell[16867, 422, 552, 16, 46, "Input"],
 Cell[CellGroupData[{
-Cell[17218, 440, 177, 3, 28, "Input"],
-Cell[17398, 445, 917739, 23505, 369, "Output"]
+Cell[17444, 442, 177, 3, 28, "Input"],
+Cell[17624, 447, 917739, 23505, 369, "Output"]
 }, Open  ]],
 Cell[CellGroupData[{
-Cell[935174, 23955, 122, 2, 28, "Input"],
-Cell[935299, 23959, 15741, 250, 1015, "Output"]
+Cell[935400, 23957, 122, 2, 28, "Input"],
+Cell[935525, 23961, 15741, 250, 1015, "Output"]
 }, Open  ]]
 }, Open  ]]
 }

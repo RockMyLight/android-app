@@ -62,27 +62,32 @@ public class ServerCommunication extends AsyncTask<String, String, String> {
 
 
     public LightStep [] parse(String st) {
-        try {
-            JSONObject obj = new JSONObject(st);
-            buffer.setDevicesInNetwork(obj.getInt("num_of_clients") );
+        if (st.trim() == "{}"){
+            buffer.clear();
+            return new LightStep[0];
+        } else {
+            try {
+                JSONObject obj = new JSONObject(st);
+                buffer.setDevicesInNetwork(obj.getInt("num_of_clients"));
 
-            JSONArray arr = obj.getJSONArray("frames");
+                JSONArray arr = obj.getJSONArray("frames");
 
-            LightStep [] lightArr = new LightStep[arr.length()];
+                LightStep[] lightArr = new LightStep[arr.length()];
 
-            for (int i = 0; i < arr.length(); i++) {
-                LightStep el = new LightStep(
-                        arr.getJSONObject(i).getLong("timestamp"),
-                        arr.getJSONObject(i).getString("color")
-                        );
-                lightArr[i] = el;
+                for (int i = 0; i < arr.length(); i++) {
+                    LightStep el = new LightStep(
+                            arr.getJSONObject(i).getLong("timestamp"),
+                            arr.getJSONObject(i).getString("color")
+                    );
+                    lightArr[i] = el;
+                }
+
+                return lightArr;
+
+            } catch (Exception e) {
+                Log.e("parse", "Could not parse JSON: " + e);
+                return new LightStep[0];
             }
-
-            return lightArr;
-
-        } catch (Exception e) {
-            Log.e("parse", "Could not parse JSON: "+e);
-            return new LightStep [0];
         }
     }
 

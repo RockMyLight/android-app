@@ -71,4 +71,9 @@ public class StepsBuffer {
 
     public void setDevicesInNetwork(int n) { devicesInNetwork = n;}
     public int getDevicesInNetwork(){ return devicesInNetwork; }
+
+    public void clear() {
+        array = null;
+        devicesInNetwork = 0;
+    }
 }

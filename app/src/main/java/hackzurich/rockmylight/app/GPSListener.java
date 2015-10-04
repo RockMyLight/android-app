@@ -24,7 +24,7 @@ public class GPSListener implements LocationListener {
     public void onLocationChanged(Location loc) {
         long dt = System.currentTimeMillis() - loc.getTime();
         ls.setDt(dt); //time sync
-        ls.setLocation(loc.getLatitude(), loc.getLongitude());
+        ls.setLocation( loc.getLatitude(), loc.getLongitude());
 
         String longitude = "Longitude: " + loc.getLongitude();
         Log.v("position", longitude);
